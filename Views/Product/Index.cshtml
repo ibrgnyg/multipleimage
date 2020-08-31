@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Multipleİmage.Models.Product>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+
+
+
+<section class="cart_area">
+	<div class="container">
+		<div class="cart_inner">
+			<div class="table-responsive">
+
+
+
+				<p>
+					<a asp-action="Create">Yeni Ekle</a>
+				</p>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">ürün adı ve gürsel</th>
+							<th scope="col">açıklama</th>
+							<th scope="col">Fiyat</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>
+									<div class="media">
+
+										@if (item.ProductPhotos != null)
+										{
+											<div class="d-flex">
+												<img src="~/mimg/@item.ProductPhotos.FirstOrDefault().AllPhotos" alt="" height="100" width="100">
+											</div>
+										}
+										else
+										{
+											<div class="d-flex">
+												<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqvvCCFRAASaxwrYf-Gm73LgEezxHjqM9IIw&usqp=CAU" alt="">
+											</div>
+										}
+
+										<div class="media-body">
+											<p>@item.ProductName</p>
+										</div>
+									</div>
+								</td>
+
+								<td>
+									<p>@item.Description</p>
+								</td>
+								<td>
+									<h5>@item.Price ₺</h5>
+								</td>
+								<td>
+									<a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+									<a asp-action="Details" asp-route-id="@item.Id">Detay</a>
+									<a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+								</td>
+							</tr>
+
+						}
+
+
+
+					</tbody>
+				</table>
+
+
+			</div>
+		</div>
+	</div>
+</section>
